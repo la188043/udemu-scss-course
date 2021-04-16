@@ -1,0 +1,111 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+
+    // padding: all
+    // padding: vertical horizontal
+    // padding: top right bottom left
+
+    padding: 1.5rem 4rem;
+    display: inline-block; // Same as inline but the padding is countent in its proportion towards other elements
+    border-radius: 10rem;
+    transition: all 0.2s; // We say at the initial state that there can be a transition on all properties
+
+    position: relative;
+    font-size: $default-font-size;
+
+    // Change for the <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2); // X offset Y offset blur color
+
+    // When we hover the button we want a certain style for the after element
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  // After is actuelly treated as a child of the element on which we use it
+  &::after {
+    // Has to be specified for the pseudo after element to appear on the page
+    content: "";
+    display: inline-block;
+
+    // 100% of the height and width of its parent which is the btn
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; // To hide it behind the btn
+    transition: all 0.4s;
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark-1;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+
+    // it automatically applies the style of the 0% before the animation starts
+    // if we dont do that, the button is here then pops up 30px lower and starts the animation
+
+    animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}

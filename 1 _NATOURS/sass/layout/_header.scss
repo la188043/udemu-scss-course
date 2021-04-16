@@ -1,0 +1,62 @@
+.header {
+  height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero-small.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    // Crop image : start top left corner then go top right corner, down right corner then down left corner
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  // IOS (safari, brave) support --> -webkit-min-device-pixel-ratio: 2(x)
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+    only screen and (min-width: 125em) {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem; // The width will be automatically figured out by the browser
+  }
+
+  &__text-box {
+    position: absolute;
+
+    // 40% from the top of the parent element (because of absolute positioning and relative positioning on parent)
+    // 50% from the left side of the parent element (same here as above)
+
+    top: 40%;
+    left: 50%;
+
+    // Because these 50% are now relative to the element itself and not the parent element
+    // It will be shifted half of the width to the left side and the same for the height
+
+    transform: translate(-50%, -50%);
+    text-align: center; // For the button because it's a anchor tag the text center is sufficiant to position it
+  }
+}

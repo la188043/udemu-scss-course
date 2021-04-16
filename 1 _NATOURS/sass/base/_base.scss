@@ -1,0 +1,55 @@
+// RESET
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  // inherit means that we force inherit this property from the closest parent where it was delcared
+  // By default box-sizing property is not inherited
+  box-sizing: inherit;
+}
+
+html {
+  // font-size: 10px;  If we do that we overwrite the user's font size in the browser
+
+  // We want 10px and the normal font-size of the browser is 16px so 10/16 = 0.625 and if the user changes the font-size of his browser, it will change too
+
+  font-size: 62.5%; // This defines what 1 rem is, 1rem = 10px, 10/16 = 62.5%
+  scroll-behavior: smooth;
+
+  // The order of media queries is IMPORTANT
+  // When smaller than 900px, it is also smaller than 1200px
+  // so the last media queries take precedence
+  // ALWAYS THE LARGER ONES BEFORE THE SMALLER ONES
+
+  // width < 1200 ?
+  @include respond(tab-land) {
+    font-size: 56.25%; // 1 rem = 9px, 9/16 = 56.25%
+  }
+
+  // width < 900 ?
+  @include respond(tab-port) {
+    font-size: 50%; // 1 rem = 8px, 8/16 = 50%
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1 rem = 12px, 12/16 = 75%
+  }
+}
+
+body {
+  // Using inheritance
+  box-sizing: border-box;
+  // White space around
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
